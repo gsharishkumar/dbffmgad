@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="PatientMetadata"></script>
+<title>Patient Metadata</title>
+
+<script type="text/javascript">
+<%@ page import="com.patient.*" %>
+function submitform()
+{
+	var patient = new PatientMetadata();
+	patient.setName(document.getElementById("name").value())
+	patient.setGender(document.getElementById("gender").value())
+	patient.setDob(document.getElementById("dob").value())
+	patient.setAge(document.getElementById("age").value())
+	patient.setWeight(document.getElementById("weight").value())
+	patient.setHeight(document.getElementById("height").value())
+	var patientMetadata = document.createElement("patientMetadata");
+	patientMetadata.value = patient;
+ 	document.getElementById("myForm").submit();
+}
+</script>
+
+</head>
+<body>
+<form id="myForm" action="patient/metadata/insert" method="POST">
+  <label for="name">Name</label>
+  <input name="name" />
+  <br/>
+  <label for="gender">Gender</label>
+  <input name="gender" />
+  <br/>
+  <label for="dob">Date of birth</label>
+  <input name="dob" />
+  <br/>
+  <label for="age">Age</label>
+  <input name="age" />
+  <br/>
+  <label for="weight">Weight</label>
+  <input name="weight" />
+  <br/>
+  <label for="height">Height</label>
+  <input name="height" />
+  <br/>
+  <!-- <input type="submit" value="Submit" /> -->
+  <button onclick="submitform()">Submit</button>
+</form>
+</body>
+</html>
