@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<!DOCTYPE HTML[]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:mso="urn:schemas-microsoft-com:office:office"
+	xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+
+<link href="Resources/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/forms.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/master.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/bootstrap-theme.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/Vendor/Plugin/bootstrap-select.css"
+	rel="stylesheet" type="text/css" />
+
+<script type="text/javascript"
+	src="Resources/Vendor/jQuery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Masonry/masonry.pkdg.min.js"></script>
+
+<script type="text/javascript" src="Resources/Vendor/Plugin/moment.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap-notify.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap-select.js"></script>
+<script type="text/javascript" src="Resources/js/master.js"></script>
+<script type="text/javascript" src="Resources/js/patientForm.js"></script>
+
+</head>
+<body
+	style="background: url('Resources/Images/BackGround.jpg') no-repeat center center fixed; background-size: cover;">
+	<div id="GD-Header" class="gd-header">
+	</div>
+
+	<div class='notifications top-left'></div>
+
+	<form id="add-patient-form">
+		<div class="container">
+			
+			<div class="row header">
+				<div class="col-md-1">
+					<a href="" id="BackButtonPageHead"> <i
+						class="fa fa-arrow-circle-o-left fa-2x" type="submit"></i>
+					</a>
+				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-3">
+					
+
+				</div>
+				<div class="col-md-3" />
+			</div>
+			<div class="col-md-1"></div>
+			<a href="Home.html"> <i class="fa fa-times-circle-o fa-2x"
+				type="submit"></i>
+			</a>
+		</div>
+
+		<div class="row mandatory">
+			<div class="col-md-6 gd-patientFormLeftColumn">
+				<div class="gd-InputRows">
+					<label for="GD-FirstName" class="gd-PatientFormText ">First
+						Name *</label> <input type="text" class="form-control" id="GD-FirstName"
+						placeholder="First Name" required></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<label for="GD-LastName" class="gd-PatientFormText ">Last
+						Name *</label> <input type="text" class="form-control" id="GD-LastName"
+						placeholder="Last Name" required></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<label for="GD-Gender" class="gd-PatientFormText ">Gender</label>
+							<select class="form-control" id="GD-Gender">
+								<option>female</option>
+								<option>male</option>
+							</select>
+						</div>
+						<div class="col-md-8">
+							<label for="GD-BirthDate" class="gd-PatientFormText ">Birthdate *</label>
+							<div class="form-group">
+								<div class='input-group date'>
+									<input type='text' class="form-control" id='GD-BirthDate' /> <span
+										class="input-group-addon"> <span
+										class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+
+
+			</div>
+			<div class="col-md-6 gd-patientFormRightColumn">
+				
+				<div class="gd-InputRows">
+					<div class="col-md-10">
+						<label for="GD-City" class="gd-PatientFormText ">City *</label> <input
+							type="text" class="form-control" id="GD-City" placeholder="City"
+							required></input>
+					</div>
+					<div class="col-md-6">
+						<label for="GD-Street" class="gd-PatientFormText ">Street *</label>
+						<input type="text" class="form-control" id="GD-Street"
+							placeholder="Street" required></input>
+					</div>
+					<div class="col-md-4">
+						<label for="GD-Nr" class="gd-PatientFormText ">Nr. *</label> <input
+							type="text" class="form-control" id="GD-Nr" placeholder="Nr."
+							required></input>
+					</div>
+					<div class="col-md-6">
+						<label for="GD-Country" class="gd-PatientFormText ">Country *</label>
+						<input type="text" class="form-control" id="GD-Country"
+							placeholder="Country" required></input>
+					</div>
+					<div class="col-md-4">
+						<label for="GD-PostalCode" class="gd-PatientFormText ">Postal
+							Code *</label> <input type="text" class="form-control" id="GD-PostalCode"
+							placeholder="Postal code"></input>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row optional">
+			<div class="col-md-6 gd-patientFormLeftColumn">
+
+				<div class="gd-InputRows">
+					<label for="GD-Email" class="gd-PatientFormText ">Email</label> <input
+						type="email" class="form-control" id="GD-Email"
+						placeholder="Email"></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<label for="GD-ContactNumber" class="gd-PatientFormText ">Contact
+						Number</label> <input type="text" class="form-control"
+						id="GD-ContactNumber" placeholder="Contact Number"></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<div class="col-md-12">
+						<div class="col-md-4">
+							<label for="GD-Weight" class="gd-PatientFormText ">Weight (kg.)</label>
+							<input type="number" step="0.01" class="form-control"
+								id="GD-Weight" placeholder="Weight"></input>
+						</div>
+						<div class="col-md-4">
+							<label for="GD-Height" class="gd-PatientFormText ">Height (m.)</label>
+							<input type="number" step="0.01" class="form-control"
+								id="GD-Height" placeholder="Height"></input>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 gd-patientFormRightColumn">
+				<div class="gd-InputRows notes">
+					<label for="GD-Notes" class="gd-PatientFormText ">Notes</label>
+					<textarea class="form-control" rows="10" id="GD-Notes"
+						placeholder="Notes"></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="gd-Footer">
+					<div class="btn-custom "
+						id="createButton" style="visibility: hidden"
+						onclick="window.GATE.PatientForm.Create()" type="submit">
+						Create
+					</div>
+					<div class="btn-custom "
+						id="deleteButton" style="visibility: hidden"
+						onclick="window.GATE.PatientForm.Delete()" type="submit">
+						Delete
+					</div>
+					<div class="btn-custom "
+						id="updateButton" style="visibility: hidden"
+						onclick="window.GATE.PatientForm.Update()" type="submit">
+						Update
+					</div>
+					
+		</div>	
+	</div>
+	
+	
+		
+		</div>
+		<input name="patient-metadata" type="hidden" />
+		<inpup name="patient-database-id" type="hidden" />
+	</form>
+</body>
