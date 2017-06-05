@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE HTML[]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:mso="urn:schemas-microsoft-com:office:office"
+	xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+<link href="Resources/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/master.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/bootstrap-theme.css" rel="stylesheet"
+	type="text/css" />
+
+<script type="text/javascript"
+	src="Resources/Vendor/jQuery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Masonry/masonry.pkdg.min.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap-notify.js"></script>
+<script type="text/javascript" src="Resources/js/login.js"></script>
+<script type="text/javascript" src="Resources/js/master.js"></script>
+
+</head>
+
+<body
+	style="background: url('Resources/Images/BackGround.jpg') no-repeat center center fixed; background-size: cover;">
+	<div id="GD-Header" class="gd-header">
+		<div id="GD-Header-Column1" class="gd-Header-Column1"></div>
+		<div id="GD-Header-Column2" class="gd-Header-Column2"></div>
+	</div>
+
+	<div class='notifications top-left'></div>
+
+	<div class="container">
+		<div class="col-md-12">
+			<div id="cardContainer" class="cardContainer">
+				<label for="GD-UserName">Username</label> <input type="text"
+					id="GD-UserName" placeholder="user" required><label
+					for="GD-Password">Password</label> <input type="password"
+					id="GD-Password" placeholder="password" required><input
+					type="submit" value="Login" onclick="window.GATE.login.check()">
+			</div>
+		</div>
+	</div>
+</body>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+
+<!DOCTYPE HTML[]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:mso="urn:schemas-microsoft-com:office:office"
+	xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+
+<link href="Resources/css/font-awesome.min.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/forms.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/master.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/bootstrap.css" rel="stylesheet"
+	type="text/css" />
+<link href="Resources/css/bootstrap-theme.css" rel="stylesheet"
+	type="text/css" />
+
+<script type="text/javascript"
+	src="Resources/Vendor/jQuery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Masonry/masonry.pkdg.min.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/moment.js"></script>
+<script type="text/javascript"
+	src="Resources/Vendor/Plugin/bootstrap-notify.js"></script>
+<script type="text/javascript" src="Resources/js/master.js"></script>
+<script type="text/javascript" src="Resources/js/medicalForm.js"></script>
+
+</head>
+<body style="background: url('Resources/Images/BackGround.jpg') no-repeat center center fixed; background-size: cover;">
+	<div id="GD-Header" class="gd-header">
+	</div>
+
+	<div class='notifications top-left'></div>
+
+	<form id="add-doctor-form">
+		<div class="container">
+			<div class="row header">
+				<div class="col-md-1">
+					<a href="" id="BackButtonPageHead"> <i
+						class="fa fa-arrow-circle-o-left fa-2x" type="submit"></i>
+					</a>
+				</div>
+				<div class="col-md-4"></div>
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-3" />
+			</div>
+			<div class="col-md-1"></div>
+			<a href="Home.html"> <i class="fa fa-times-circle-o fa-2x"
+				type="submit"></i>
+			</a>
+		</div>
+		<div class="row mandatory">
+			<div class="col-md-6 gd-patientFormLeftColumn">
+
+				<div class="gd-InputRows">
+					<label for="GD-DoctorId" class="gd-PatientFormText ">Doctor
+						ID</label> <input type="text" class="form-control" id="GD-DoctorId"
+						placeholder="Doctor ID" required></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<label for="GD-FirstName" class="gd-PatientFormText ">First
+						Name</label> <input type="text" class="form-control" id="GD-FirstName"
+						placeholder="First Name" required></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<label for="GD-LastName" class="gd-PatientFormText ">Last
+						Name</label> <input type="text" class="form-control" id="GD-LastName"
+						placeholder="Last Name" required></input>
+				</div>
+
+				<div class="gd-InputRows">
+					<label for="GD-MedicalCenter" class="gd-PatientFormText ">Medical
+						Center</label> <input type="text" class="form-control"
+						id="GD-MedicalCenter" placeholder="Medical Center" required></input>
+				</div>
+
+			</div>
+			<div class="col-md-6 gd-patientFormRightColumn">
+
+				<div class="gd-InputRows notes">
+					<label for="GD-Notes" class="gd-PatientFormText ">Notes</label>
+					<textarea class="form-control" rows="10" id="GD-Notes"
+						placeholder="Notes"></textarea>
+				</div>
+
+			</div>
+			
+		</div>
+		<div class="gd-Footer">
+					<div class="btn-custom" 
+						id="createButton" onclick="window.GATE.Medicals.Add()" type="submit">
+						Create
+					</div>
+					<button type="submit" class="btn-custom" style="visibility: hidden"
+						id="deleteButton" onclick="window.GATE.Medicals.Delete()" type="submit">
+						Delete
+					</button>
+					<div type="submit" class="btn-custom" style="visibility: hidden"
+						id="updateButton" onclick="window.GATE.Medicals.Update()" type="submit">
+						Update
+					</div>
+					
+		</div>
+		
+		<div class="row availableMedicals">
+			<label for="MedicalsSearchResults">Medicals</label>
+			<div class="col-md-12" id="MedicalsSearchResults"></div>
+			
+		</div>
+		<div class="gd-Footer">
+			</div>
+	</form>
+</body>

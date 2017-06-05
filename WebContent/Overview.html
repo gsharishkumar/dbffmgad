@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<!DOCTYPE HTML[]>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:mso="urn:schemas-microsoft-com:office:office"
+	xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+<link href="Resources/css/font-awesome.min.css" rel="stylesheet"type="text/css" />
+<link href="Resources/css/master.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/overview.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+<link href="Resources/css/cornerstone.min.css" rel="stylesheet" type="text/css" >
+<link href="Resources/css/jquery-ui.css" rel="stylesheet" type="text/css" >
+
+<script type="text/javascript" src="Resources/Vendor/jQuery/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/moment.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Masonry/masonry.pkdg.min.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/bootstrap-notify.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/bootstrap.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/Chart.min.js"></script>
+<script type="text/javascript" src="Resources/Vendor/jQuery/jquery-ui.js"></script>
+
+<!--
+Currently not in use but could be helpfull for table viewing 
+<script type="text/javascript" src="Resources/Vendor/Plugin/underscore-1.5.2.min.js"></script>
+<script type="text/javascript" src="Resources/Vendor/Plugin/jquery.scrollTableBody-1.0.0.js"></script>
+-->
+
+<!-- include the cornerstone library -->
+<script src="Resources/Vendor/DICOM/cornerstone.min.js"></script>
+<script src="Resources/Vendor/DICOM/cornerstoneMath.min.js"></script>
+
+<!-- include the cornerstone tools library -->
+<script src="Resources/Vendor/DICOM/cornerstoneTools.min.js"></script>
+<script src="Resources/Vendor/DICOM/dicomParser.min.js"></script>
+<script src="Resources/Vendor/DICOM/cornerstoneWADOImageLoader.js"></script>
+
+<!-- include custom scripts -->
+
+<script type="text/javascript" src="Resources/js/dicomParser.js"></script>
+<script type="text/javascript" src="Resources/js/master.js"></script>
+<script type="text/javascript" src="Resources/js/overview.js"></script>
+<script type="text/javascript" src="Resources/js/Components/helper.js"></script>
+</head>
+
+<body style="background-color: #eaeaea;">
+
+	<!-- Modal -->
+
+	<!-- Modal Add new Sole Data -->
+	<div id="soleData-Modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">New Sole Data Information</h4>
+				</div>
+				<div class="modal-body">
+					<label for="field1" class="gd-ModalFormText">Notes</label> 
+						<textarea class="form-control" rows="10"  id="field1" placeholder="additional notes" required></textarea> 
+					<label for="field2" class="gd-ModalFormText ">Sole Data</label>
+					<div class="form-group" id="field2">
+						<form id="soleupload" name="soleupload" method="post"enctype="multipart/form-data">
+							<div class='input-group date'>
+								<input type='file' name='soledata' size="45" class="form-control" id='GD-ModalUploadSoleDataButton' placeholder='no file selected' required/> 
+								 <span class="input-group-addon"> 
+									<span class="fa fa-file"></span>
+								 </span>
+							</div>
+							<input type="hidden" id="pid" name="pid" />	
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-default" data-dismiss="modal" onclick="window.GATE.Overview.UploadSoleData()">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Add Additional Files  -->
+	<div id="files-Modal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">New Patient files</h4>
+				</div>
+				<div class="modal-body">
+					<form id="additionalfileupload" name="additionalfileupload" method="post" enctype="multipart/form-data">
+						<label for="field3" class="gd-ModalFormText ">Upload additional files</label>
+						<div class="form-group" id="field3">
+							<div class='input-group date'>
+								<input type='file' name="other-file" class="form-control" id='GD-ModalUploadSoleDataButton' placeholder='no file selected' />
+								<span class="input-group-addon" onclick="window.GATE.Overview.UploadAdditionalData()"> 
+									<span class="fa fa-file"></span>
+								</span>
+							</div>
+						</div>
+						<input type="hidden" id="gd-other-file-pid" name="other-file-pid" />
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" onclick="window.GATE.Overview.UploadAdditionalFiles()">Save</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Custom Modal Dicom Viewer  -->
+	<div id="Dicom-Modal" class="gd-Dicom-Modal">
+		<div class="gd-Dicom-Modal-body">
+			<div class="gd-DicomHeader" >
+				<span id="mrbottomleft" style="color: white; float:left;font-weight:lighter;">
+        		</span>
+				<button  type="button" class="btn-custom-Modal btn-close-modal" onclick="window.GATE.Overview.ToggleCustomModal()" title="Close DICOM Viewer"><i class="fa fa-times"></i></button>	
+			</div>
+			<div class="gd-Dicom-Modal-Image"
+				oncontextmenu="return false"
+				class='cornerstone-enabled-image'
+				unselectable='on'
+				onselectstart='return false;'
+				onmousedown='return false;'>
+				<div id="dicomImage" style="width:100%;height:100%;">
+				</div>
+			</div>
+			<div class="gd-DicomFooter" >
+				<button  type="button" id="enableWindowLevelTool" class="btn-custom-Modal">WW/WC</button>
+				<button  type="button" id="pan" class="btn-custom-Modal" >Pan</button>
+				<button  type="button" id="zoom"  class="btn-custom-Modal" >Zoom</button>
+				<button  type="button" id="enableLength" class="btn-custom-Modal" >Length</button>
+				<button  type="button" id="probe" class="btn-custom-Modal" >Probe</button>
+				<button  type="button" id="circleroi" class="btn-custom-Modal" >Elliptical ROI</button>
+				<button  type="button" id="rectangleroi" class="btn-custom-Modal" >Rectangle ROI</button>
+				<button  type="button" id="angle" class="btn-custom-Modal" >Angle</button>
+				<button  type="button" id="highlight" class="btn-custom-Modal" >Hightlight</button>
+				<button  type="button" id="freehand" class="btn-custom-Modal" >Freeform ROI</button>
+			</div>
+			
+		</div>
+	</div>
+
+	<div id="GD-Header" class="gd-header">
+		
+	</div>
+
+	<div class="row gd-body">
+		<div class="col-md-1">
+			<a href="Home.html" class="btn-arrow-left" > 
+				<i class="fa fa-2x fa-arrow-circle-o-left"></i>
+			</a>
+		</div>
+
+		<div class="col-md-3 gd-LeftContainer">
+			<div class="col-md-12 container">
+				<div class="gd-SoleData">
+				
+					<div class="gd-TileHeader">
+						<div>Sole Data</div>
+						<button type="button" class="btn-filter" id="GD-ClearFilter" title="Clear Date Time Filter">
+							<i class="fa fa-filter"></i>
+						</button>	
+						<div class=" col-md-12 gd-FilterDatePicker">
+							<div class="col-sm-6 gd-InputRows">
+								<div class="form-group" style="margin-bottom:0px !important">
+									<div class='input-group date'>
+										<input type='text' class="form-control" id='GD-FilterDatePickerFrom' placeholder='Filter from' /> 						
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar">
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 gd-InputRows">
+								<div class="form-group" style="margin-bottom:0px !important">
+									<div class='input-group date'>
+										<input type='text' class="form-control" id='GD-FilterDatePickerTo' placeholder="to" /> 
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar">
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>		
+					</div>
+					
+					<div class=" col-md-12 gd-Data-Container">
+						<table class="table">
+							<thead>
+								<th colspan="2"></th>
+								<th class="gd-column-label" >
+									<input type="checkbox" name="select-all" id="select-all" onclick="window.GATE.Overview.ToggleCheckBox()" />
+								</th>
+								<th></th>
+								
+						 	</thead>
+						 	<tbody id='Gd-SoleDataItemsContainer'></tbody>
+					  	</table>
+					</div>	
+				<div class="gd-GenericInputContainer" >
+					<input type="number" class="gd-StressLevelInput" id="GD-StressLevelInput" placeholder="optional stress level limitation value"/>
+				</div>
+				</div>
+				<div class="gd-TileFooter">
+					<button  type="button" class="btn-custom btn-custom-right" data-toggle="modal" data-keyboard="true" href="#soleData-Modal" title="Add new Sole Data" id="GD-AddSoleDataButton">
+						Add Sole Data
+					</button>
+					<button  type="button" class="btn-custom btn-custom-middle" id="GD-LoadAnalytics" onclick="window.GATE.Overview.LoadMultipleSolefileData()">
+						Load Analytics
+					</button>
+				</div>
+			</div>
+			
+	    	<div class="col-md-12">
+				<div class="gd-RelatedFilesData">	
+					<div class="gd-TileHeader">
+						<div>Documents</div>	
+						<button type="button" class="btn-arrow-down"  onclick="window.GATE.Overview.ToggleTable()">
+							<i class="fa fa-2x fa-angle-up"></i>
+						</button>
+						<div class="gd-GenericInputContainer gd-toggleable">
+							<input class='gd-Document-Search' id='GD-Document-Search' type='text' placeholder="search document" />
+						</div>							
+					</div>
+					<div class="gd-Data-Container gd-toggleable">	
+						<table class="table">
+							<tbody gd='gd-RelatedFilesContainer' id='GD-RelatedFilesContainer'>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="gd-TileFooter">
+					<button type="button" class="btn-custom btn-custom-right" data-toggle="modal" data-keyboard="true" href="#files-Modal" title="Add new Files" id="GD-AddRelatedFilesButton">Add File</button>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="col-md-7 container">
+			<div class="gd-Analysis-UserInformation ">
+				<label for="GD-UserInfo-Username">Name</label>
+					<div class="gd-UserInfoValue" id="GD-UserInfo-Username"></div>
+				<label for="GD-UserInfo-Age">Age</label>
+					<div class="gd-UserInfoValue" id="GD-UserInfo-Age"></div>
+				<label for="GD-UserInfo-Weight">Weight</label>
+					<div class="gd-UserInfoValue" id="GD-UserInfo-Weight"></div>
+				<label for="GD-UserInfo-Height">Height</label>
+					<div class="gd-UserInfoValue" id="GD-UserInfo-Height"></div>
+				<label for="GD-UserInfo-BMI">BMI</label>
+					<div class="gd-UserInfoValue" id="GD-UserInfo-BMI"></div>	
+				<input class="gd-UserInfo-ID" id="GD-UserInfo-ID" type="hidden" />
+				<a class="btn-custom btn-custom-userprofilelink" href="window.GATE.PatientForm.FillPatientMetadataOnLoad()" id="GD-UserInfo-Edit">Edit</a>
+			</div>
+		</div>
+		
+		<div class="col-md-7 container">
+			<div class="col-md-12">
+				<div class="gd-AnalysisContainer" id="GD-AnalysisContainer"></div>
+			</div>
+		
+			<div class="col-md-12">
+				<div class="gd-MISCContainer">
+					<div class="gd-TileHeader">
+						<div>Misc Data</div>
+						<button type="button" class="btn-arrow-down"  onclick="window.GATE.Overview.ToggleTable()">
+							<i class="fa fa-2x fa-angle-down"></i>
+						</button>
+						<button type="button" class="btn-chart" id="GD-ToggleChart">
+							<i class="fa fa-area-chart"></i>
+						</button>
+						<div class="gd-CanvasContainer" >
+							<canvas id="canvas" height="40%" max-width="100%"></canvas>
+						</div>
+					</div>
+					<div class="gd-FSbody gd-toggleable" id="gd-MiscWrapper">		
+						<table class='table gd-MISCTabel'>	
+							<thead>
+								<th class="gd-column-label" >Date</th>
+								<th class="gd-column-label" >
+									<span>Pain NRS </span>
+									<i class="fa fa-circle" style="color:rgba(252, 148, 50,1)"></i></th>
+								<th class="gd-column-label" >
+									<span>Pain VAS </span>
+									<i class="fa fa-circle" style="color:rgba(151,187,205,1)"></i></th>
+								<th class="gd-column-label" colspan="2" >
+									<span>Content Level </span>
+									<i class="fa fa-circle" style="color:rgba(73, 147, 8,1)"></i></th>
+							</thead>				
+							<tbody id='GD-Modal-MISCTabel'></div>
+						</table>
+					</div>
+				</div>
+				<div class="gd-TileFooter gd-toggleable">
+					<button type="button" class="btn-custom btn-custom-right" onclick="window.GATE.Overview.CreateMISCItem()">Add</button>
+					<button type="button" class="btn-custom btn-custom-middle" onclick="window.GATE.Overview.SaveMISCData()">Save</button>	
+				</div>
+			</div>
+			
+			<div class="col-md-12">
+				<div class="gd-FunctionScoreContainer">
+					<div class="gd-TileHeader">					
+						<div>Function Scores</div>
+						<button type="button" class="btn-arrow-down"  onclick="window.GATE.Overview.ToggleTable()">
+							<i class="fa fa-2x fa-angle-down"></i>
+						</button>
+						<div class="gd-GenericInputContainer gd-toggleable" style="display:none"  >
+							<input class='gd-FunctionScore-Search' id='GD-FunctionScore-Search' type='text' placeholder="search function score name" />
+						</div>	
+					</div>
+					<div class="gd-FSbody gd-toggleable" id="gd-FunctionScoreWrapper">
+							
+						<table class='table gd-FunctionScoreTabel'>	
+							<thead>
+								<th class="gd-column-label" >Date</th>
+								<th class="gd-column-label" >Name</th>
+								<th class="gd-column-label" colspan="2" >Value</th>
+							</thead>				
+							<tbody id='GD-Modal-FunctionScoreTabel'/>
+						</table>
+					</div>
+				</div>
+				<div class="gd-TileFooter">
+					<button type="button" class="btn-custom btn-custom-right" onclick="window.GATE.Overview.CreateFunctionScoresItem()">Add</button>
+					<button type="button" class="btn-custom btn-custom-middle" onclick="window.GATE.Overview.SaveFunctionScoreData()">Save</button>		
+				</div>
+			</div>
+			
+			
+		</div>
+		
+	</div>
+   
+</body>
+</html>
